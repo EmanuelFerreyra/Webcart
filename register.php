@@ -1,8 +1,8 @@
 <?php session_start();
 include("config.php");
 
-$username = $password = $confirm_password = $email ="";
-$username_err = $password_err = $confirm_password_err = $email_err = "";
+$username = $password = $email ="";
+$username_err = $password_err = $email_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -32,22 +32,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     else
         $password = trim($_POST["password"]);
 
-    if(empty(trim($_POST["confirm_password"])))
-        $confirm_password_err = "Please confirm password.";
-    else
-    {
-        $confirm_password = trim($_POST["confirm_password"]);
-        
-        if(empty($password_err) && ($password != $confirm_password))
-            $confirm_password_err = "Password did not match.";
-    }
-
     if(empty(trim($_POST["email"])))
         $email_err = "Please enter an email";
     else
         $email = trim($_POST["email"]);
 
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err))
+    if(empty($username_err) && empty($password_err) && empty($email_err))
     {
         $sql = "INSERT INTO users (username, password,email) VALUES (?, ?, ?)";
          
@@ -95,11 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" value="">
                 <span><?php echo $password_err; ?></span><br />
-            </div>
-            <div >
-                <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="">
-                <span><?php echo $confirm_password_err; ?></span><br />
             </div>
             <div >
                 <label>Email</label>
