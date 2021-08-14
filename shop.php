@@ -1,6 +1,4 @@
 <?php
-session_start();
-include('config.php');
 include('session.php');
 if($_SESSION['login_user']=='admin')
 {
@@ -26,7 +24,7 @@ $status="";
 if (isset($_POST['id']) && $_POST['id']!="")
 {
     $id = $_POST['id'];
-    $result = mysqli_query($db,"SELECT * FROM `products` WHERE `id`='$id'");
+    $result = mysqli_query($conn->on(),"SELECT * FROM `products` WHERE `id`='$id'");
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $id = $row['id'];
@@ -75,7 +73,7 @@ else
 <a href="cart.php"><img src="images/cart.png" width="80" height="80"/> Cart<span>
 <?php echo $cart_count; ?></span></a></div>
 <?php
-$result = mysqli_query($db,"SELECT * FROM `products`");
+$result = mysqli_query($conn->on(),"SELECT * FROM `products`");
 while($row = mysqli_fetch_assoc($result))
 {
     echo "<div class='product'>
@@ -88,7 +86,7 @@ while($row = mysqli_fetch_assoc($result))
     </form>
     </div>";
 }
-mysqli_close($db);
+mysqli_close($conn->on());
 ?>
 <div style="clear:both;"></div>
  
