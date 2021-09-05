@@ -6,19 +6,19 @@ $username_err = $password_err = $email_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
- 
+
     if(empty(trim($_POST['username'])))
     {
         $username_err = "Please enter a username.";
-    } 
+    }
     else
     {
         $temp=trim($_POST["username"]);
         $sql = "SELECT id FROM users WHERE username = '$temp'";
         $result = mysqli_query($conn->on(),$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $active = $row['active'];
-        $count = mysqli_num_rows($result);                
+//        $active = $row['active'];
+        $count = mysqli_num_rows($result);
         if($count== 1)
             $username_err = "This username is already taken.";
         else
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     if(empty($username_err) && empty($password_err) && empty($email_err))
     {
         $sql = "INSERT INTO users (username, password,email) VALUES (?, ?, ?)";
-         
+
         if($stmt = mysqli_prepare($conn->on(), $sql))
         {
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password,$param_email);
@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     mysqli_close($conn->on());
 }
 ?>
- 
+
  <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <input type="text" name="username" placeholder="Username" class="form-control" value="">
                 <?php print (empty($username_err)) ? '' : '<span class="error-login">'.$username_err.'</span>' ; ?>
                 <br />
-            </div>    
+            </div>
             <div >
                 <input type="password" name="password" placeholder="Password" class="form-control" value="">
                 <?php print (empty($password_err)) ? '' : '<span class="error-login">'.$password_err.'</span>' ; ?>
@@ -104,6 +104,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
     </div>
-    </div>    
+    </div>
 </body>
 </html>

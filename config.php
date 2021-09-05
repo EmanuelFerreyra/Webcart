@@ -9,7 +9,7 @@ class Connection {
    {
       $this->conn = mysqli_connect( $host,$root,$pass,$database);
    }
-   
+
 
    public function on(){
       return $this->conn;
@@ -18,6 +18,6 @@ class Connection {
 }
 
 
-$conn = new Connection('localhost','rohit','parayilla','shopcart');
+$conn = new Connection('localhost','rohit','Rohit@123','shopcart');
 
 ?>
