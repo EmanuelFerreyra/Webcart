@@ -1,11 +1,23 @@
 <?php
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'rohit');
-define('DB_PASSWORD', 'parayilla');
-define('DB_DATABASE', 'shopcart');
-$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-if (!$db) 
+
+//*We connect to the database
+class Connection {
+
+   protected $conn;
+
+   public function __construct($host,$root,$pass,$database)
    {
-      die("Connection failed: " . mysqli_connect_error());
+      $this->conn = mysqli_connect( $host,$root,$pass,$database);
    }
+   
+
+   public function on(){
+      return $this->conn;
+   }
+
+}
+
+
+$conn = new Connection('localhost','rohit','parayilla','shopcart');
+
 ?>

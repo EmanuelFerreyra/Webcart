@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $temp=trim($_POST["username"]);
         $sql = "SELECT id FROM users WHERE username = '$temp'";
-        $result = mysqli_query($db,$sql);
+        $result = mysqli_query($conn->on(),$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $active = $row['active'];
         $count = mysqli_num_rows($result);                
@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $sql = "INSERT INTO users (username, password,email) VALUES (?, ?, ?)";
          
-        if($stmt = mysqli_prepare($db, $sql))
+        if($stmt = mysqli_prepare($conn->on(), $sql))
         {
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password,$param_email);
             $param_username = $username;
@@ -60,40 +60,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             mysqli_stmt_close($stmt);
         }
     }
-    mysqli_close($db);
+    mysqli_close($conn->on());
 }
 ?>
  
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="./normalize.css">
+   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div>
         <div class="wrapper">
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
-        <form method="post" >
+        <h2 class="text-center">Sign Up</h2>
+        <p class="text-center">Please fill this form to create an account.</p>
+        <form class="form-login" method="post" >
             <div >
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="">
-                <span><?php echo $username_err; ?></span><br />
+                <input type="text" name="username" placeholder="Username" class="form-control" value="">
+                <?php print (empty($username_err)) ? '' : '<span class="error-login">'.$username_err.'</span>' ; ?>
+                <br />
             </div>    
             <div >
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" value="">
-                <span><?php echo $password_err; ?></span><br />
+                <input type="password" name="password" placeholder="Password" class="form-control" value="">
+                <?php print (empty($password_err)) ? '' : '<span class="error-login">'.$password_err.'</span>' ; ?>
+                <br />
             </div>
             <div >
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" value="">
-                <span><?php echo $email_err; ?></span><br />
+                <input type="email" name="email" placeholder="Email" class="form-control" value="">
+                <?php print (empty($email_err)) ? '' : '<span class="error-login">'.$email_err.'</span>' ; ?>
+                <br />
             </div>
             <div class="form-group">
-                <input type="submit" value="Submit">
-                <input type="reset" value="Reset">
+                <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+                <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
             </div>
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
         </form>

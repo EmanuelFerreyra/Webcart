@@ -1,4 +1,89 @@
- .product{
+
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+ }
+ label {
+	font-weight:bold;
+	width:100px;
+	font-size:14px;
+ }
+ .box {
+	border:#666666 solid 1px;
+ }
+/*FLOGIN FOMULARIO*/
+ .form-login{
+	width: 45%;
+	margin: auto;
+	box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.12),0px 3px 3px 0px rgba(0,0,0,0.12);
+	border-radius: 2px;
+	padding: 2%;
+}
+
+.form-login input{
+	width: 90%;
+	margin-top: 2%;
+	text-align: center;
+	padding: 2%;
+	border: 1px solid #2f2f30;
+	border-radius: 2px;
+}
+
+.login{
+	padding: 2%;
+	color: #000;
+	font-size: 1.2rem;
+	margin: 0px;
+	margin-top: 2%;
+}
+
+.error-login{
+	width: 30%;
+	font-size: 0.7rem;
+	display: block;
+	margin-top: 2%;
+	border: 0px;
+	border-left: 3px solid #cc0b1b;
+	padding: 3px;
+	background: #f1f1f1;
+	color: #cc0b1b;
+	text-align: center;
+}
+.register{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	color: #cc0b1b;
+}
+.text-center{
+	text-align: center;
+}
+
+.btn{
+	margin-top: 2%;
+	border: 0px;
+	border-radius: 2px;
+	padding: 2%;
+	transform: scale(1);
+	transition: all 0.2s;
+	cursor: pointer;
+}
+
+.btn:hover{
+	border: 0px;
+	border-radius: 2px;
+	padding: 2%;
+	transform: scale(0.9);
+}
+
+.btn-primary{
+	background-color: #000000;
+	font-size: 1rem;
+	color: #fff;
+}
+
+
+.product{
  	text-transform: uppercase;
  	background: #FFFFFF;
  	border: 1px solid #000000;
